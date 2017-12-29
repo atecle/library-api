@@ -5,7 +5,6 @@ class AddDefaultValueToAvailableAttribute < ActiveRecord::Migration[5.1]
   end
 
   def down
-    change_column :books, :available, :boolean, default: nil
+    change_column :books, :available, :boolean, default: true
   end
-
 end
