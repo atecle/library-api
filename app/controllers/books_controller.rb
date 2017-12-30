@@ -3,6 +3,8 @@ class BooksController < ApplicationController
 
   ActionController::Parameters.action_on_unpermitted_parameters = :raise
 
+# post/delete requests are disabled for now.
+
   rescue_from(ActionController::UnpermittedParameters) do |pme|
   render json: { error:  { unknown_parameters: pme.params } },
              status: :bad_request
