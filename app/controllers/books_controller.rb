@@ -1,5 +1,12 @@
 class BooksController < ApplicationController
-  before_action :set_book, only: [:show, :update, :destroy]
+  before_action :set_book, :validate_params, only: [:show, :update, :destroy]
+
+  ActionController::Parameters.action_on_unpermitted_parameters = :raise
+
+  rescue_from(ActionController::UnpermittedParameters) do |pme|
+  render json: { error:  { unknown_parameters: pme.params } },
+             status: :bad_request
+  end
 
   # GET /books
   def index
@@ -48,4 +55,25 @@ class BooksController < ApplicationController
     def book_params
       params.permit(:title, :author)
     end
+
+    def validate_params
+     book = Validate::Book.new(params)
+     if !book.valid?
+       render json: { error: book.errors } and return
+     end
+   end
+end
+
+module Validate
+  class Book
+
+    attr_accessor :title, :author
+
+    def initialize(params={})
+      @title  = params[:title]
+      @author = params[:author]
+      ActionController::Parameters.new(params).permit(:title,:author)
+    end
+
+  end
 end
