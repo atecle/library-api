@@ -29,12 +29,16 @@ gem 'puma', '~> 3.7'
 
 group  :test do
   gem 'ruby-prof'
+  gem 'database_cleaner'
 end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 3.6'
+  gem 'factory_bot_rails'
+  gem 'faker'
+  gem 'shoulda-matchers', '~> 3.1'
 end
 
 group :development do
