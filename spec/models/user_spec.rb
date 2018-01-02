@@ -18,7 +18,7 @@ RSpec.describe User, type: :model do
   end
 
   it "should accept valid email addresses" do
-    emails = %w[test@test.com user@user.com A-TEST-10@user.test.gov
+    emails = %w[test@user.com user@user.com A-TEST-10@user.test.gov
                        testing.T.T.e.st.test@company.com]
 
     emails.each do |email|
